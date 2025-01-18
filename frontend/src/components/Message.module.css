@@ -1,0 +1,21 @@
+.sender {
+    background-color: #d1e7ff;
+    padding: 5px;
+    border-radius: 10px;
+    width: 300px;
+    align-self: flex-start;
+  }
+  
+  .receiver {
+    background-color: #ffe7d1;
+    padding: 5px;
+    border-radius: 10px;
+    width: 300px;
+    align-self: flex-end; 
+  }
+
+  .sender p, .receiver p {
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: pre-wrap; 
+}
