@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css'
 import Message from './components/Message';
 import Contact from './components/Contact';
+import { BsSearch } from "react-icons/bs";
+import { HiOutlineChatAlt2 } from "react-icons/hi";
 
 function App() {
   const [message, setMessage] = useState<string>('');
@@ -9,14 +11,44 @@ function App() {
   const [type, setType] = useState<"sender" | "receiver">("sender")
   const [placeholder, setPlaceholder] = useState<string>('Type a message');
 
+  const [searchedContact, setSearchedContact] = useState<string>('');
+  const [searchPlaceholder, setSearchPlaceholder] = useState<string>('Search or start a new chat');
+  const [contactsToDisplay, setContactsToDisplay] = useState<string[]>([]);
+
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
-  const contacts: string[] = ['John Doe', 'Jane Smith', 'Emily Davis', 'Michael Johnson', 'Sarah Lee'];
+  const contacts: string[] = [
+    'John Doe',
+    'Jane Smith',
+    'Emily Davis',
+    'Michael Johnson',
+    'Sarah Lee',
+    'Oliver Brown',
+    'Sophia Wilson',
+    'Liam Miller',
+    'Charlotte Anderson',
+    'Benjamin Thomas',
+    'Amelia Carter',
+    'Ethan Moore',
+    'Isabella Taylor',
+    'Noah Martinez',
+    'Mia Harris'
+  ];
 
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: 'auto', block: 'end' });
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (searchedContact != '') {
+      setContactsToDisplay(contacts.filter((contact) => contact.toLocaleLowerCase().includes(searchedContact.toLocaleLowerCase())))
+    } else {
+      setContactsToDisplay(contacts); 
+    }
+
+  }, [searchedContact])
+
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -37,14 +69,28 @@ function App() {
   return (
     <div>
       <div className='header-container'>
-        <h1>Chat App</h1>
+        <h2>Chat App</h2> <HiOutlineChatAlt2 />
       </div>
 
       <div className='main-chat-container'>
         <div className='contacts-container'>
-          {contacts.map((contact, index) => (
-            <Contact key={index} name={contact} />
-          ))}
+          <div className="search-container">
+            <BsSearch />
+            <input
+              type="text"
+              value={searchedContact}
+              placeholder={searchPlaceholder}
+              onFocus={() => setSearchPlaceholder('')}
+              onBlur={() => !searchedContact && setSearchPlaceholder('Search or start a new chat')}
+              onChange={(e) => setSearchedContact(e.target.value)}
+            />
+          </div>
+          <div className='contact-list'>
+            {contactsToDisplay.map((contact, index) => (
+              <Contact key={index} name={contact} />
+            ))}
+          </div>
+
 
         </div>
         <div className='messages-container'>

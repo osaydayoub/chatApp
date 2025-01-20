@@ -1,7 +1,13 @@
 .header-container{
   border-radius: 10px;
   border: solid 2px black;
-  padding: 15px;
+  padding: 5px;
+  display: flex;
+  align-items: center; 
+  gap: 5px; 
+}
+.header-container svg {
+  font-size: 24px; /* Adjust the icon size */
 }
 .main-chat-container{
   padding: 15px;
@@ -10,6 +16,14 @@
 }
 .contacts-container{
   width: 30%;
+  padding: 10px;
+  height:350px;
+  overflow-y: scroll;
+}
+.contact-list{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .messages-container{
@@ -22,9 +36,23 @@
   padding: 10px;
   height: 300px;
   overflow-y: scroll;
+  /* overflow-y: auto; */
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.search-container{
+  padding: 10px;
+  border-radius: 10px;
+  height: 40px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 90%;
+  border: solid 1px rgb(175, 175, 175);
+  margin-bottom: 10px;
 }
 
 
